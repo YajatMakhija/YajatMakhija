@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="505" viewBox="0 0 1440 505" role="img" aria-label="Mission files: Notrix in development, Voice AI in production, research projects ongoing">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07192D"/><stop offset="1" stop-color="#0E2844"/></linearGradient>
+ <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#73E5FF"/><stop offset="1" stop-color="#357CD8"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#2F9CCE" stop-opacity=".3"/><stop offset="1" stop-color="#2F9CCE" stop-opacity="0"/></radialGradient>
+ <pattern id="grid" width="39" height="39" patternUnits="userSpaceOnUse"><path d="M39 0H0V39" fill="none" stroke="#7FB4D5" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="1440" height="505" rx="30" fill="url(#bg)"/>
+<rect width="1440" height="505" rx="30" fill="url(#grid)"/>
+<circle cx="1240" cy="280" r="310" fill="url(#glow)"/>
+<path d="M38 44h62M38 44v38M1402 44h-62M1402 44v38" fill="none" stroke="#8CE5FF" stroke-opacity=".48" stroke-width="2"/>
+<text x="66" y="82" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#7CE6FF">01 / ACTIVE SYSTEMS</text>
+<text x="66" y="138" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#F3F8FF">CURRENT MISSIONS</text>
+<text x="66" y="174" font-family="Inter,Arial,sans-serif" font-size="18" fill="#A5B9CC">Real products first. More capable systems next.</text>
+<path d="M65 208H1375" stroke="#AACEE0" stroke-opacity=".2"/>
+<path d="M501 234V444M944 234V444" stroke="#AACEE0" stroke-opacity=".18"/>
+<g font-family="Inter,Arial,sans-serif">
+  <text x="68" y="256" font-size="19" font-weight="600" fill="#7CE6FF">MISSION / 001</text>
+  <text x="68" y="313" font-size="41" font-weight="800" fill="#FFFFFF">NOTRIX</text>
+  <text x="68" y="354" font-size="20" fill="#C3D3E2">Company memory for teams</text>
+  <text x="68" y="385" font-size="20" fill="#C3D3E2">and AI agents · BYOC</text>
+  <rect x="66" y="416" width="211" height="37" rx="18" fill="#4B3A2A"/>
+  <text x="86" y="441" font-size="15" font-weight="700" letter-spacing="1" fill="#FFD297">IN DEVELOPMENT</text>
+  <text x="529" y="256" font-size="19" font-weight="600" fill="#7CE6FF">MISSION / 002</text>
+  <text x="529" y="313" font-size="38" font-weight="800" fill="#FFFFFF">VOICE AI</text>
+  <text x="529" y="354" font-size="20" fill="#C3D3E2">Healthcare outreach and</text>
+  <text x="529" y="385" font-size="20" fill="#C3D3E2">booking · four clinics</text>
+  <rect x="527" y="416" width="185" height="37" rx="18" fill="#163C39"/>
+  <text x="548" y="441" font-size="15" font-weight="700" letter-spacing="1" fill="#A6F1CE">IN PRODUCTION</text>
+  <text x="973" y="256" font-size="19" font-weight="600" fill="#7CE6FF">MISSION / 003</text>
+  <text x="973" y="313" font-size="38" font-weight="800" fill="#FFFFFF">AI SYSTEMS</text>
+  <text x="973" y="354" font-size="20" fill="#C3D3E2">Retrieval · agents · memory</text>
+  <text x="973" y="385" font-size="20" fill="#C3D3E2">Research and prototypes</text>
+  <rect x="971" y="416" width="209" height="37" rx="18" fill="#16384C"/>
+  <text x="993" y="441" font-size="15" font-weight="700" letter-spacing="1" fill="#A6E9FF">EXPERIMENTING</text>
+</g>
+</svg>

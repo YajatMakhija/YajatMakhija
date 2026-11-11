@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Yajat Makhija — founder, AI systems engineer, and builder. Mission Control for Notrix, AI memory systems, and production AI workflows." />
+  <meta property="og:title" content="Yajat Makhija — Mission Control" />
+  <meta property="og:description" content="Founder, AI systems engineer, and builder focused on memory, retrieval, and real-world AI products." />
+  <meta property="og:image" content="assets/hero-still.png" />
+  <title>Yajat Makhija — Mission Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#06111b;
+      --bg-soft:#0c1624;
+      --panel:rgba(10,19,33,.7);
+      --panel-2:#0f1d31;
+      --text:#e9f3ff;
+      --muted:#9fb4c9;
+      --line:rgba(255,255,255,.1);
+      --line-strong:rgba(131,216,255,.28);
+      --cyan:#7fe5ff;
+      --cyan-strong:#2dc6ff;
+      --blue:#71a6ff;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --max:1200px;
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(73,145,255,.18), transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(45,198,255,.14), transparent 30%),
+        linear-gradient(180deg, #07111c 0%, #081423 30%, #09111b 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+      opacity:.35; pointer-events:none;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(6,17,27,.58);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:74px}
+    .brand{display:flex; align-items:center; gap:14px}
+    .brand-mark{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(127,229,255,.22), rgba(255,255,255,.06));
+      border:1px solid var(--line-strong);
+      display:grid;place-items:center;font:700 15px "Space Grotesk",sans-serif;color:var(--cyan)
+    }
+    .brand-copy strong{display:block; font-size:14px; letter-spacing:.18em}
+    .brand-copy span{font-size:12px; color:var(--muted); letter-spacing:.18em}
+    .nav-links{display:flex; gap:26px; align-items:center}
+    .nav-links a{font-size:13px; color:var(--muted); letter-spacing:.13em}
+    .nav-links a:hover{color:var(--text)}
+    .cta-btn, .ghost-btn, .chip, .prompt, .send-btn{
+      border:1px solid var(--line-strong);
+      transition:.25s ease;
+    }
+    .cta-btn{
+      background:linear-gradient(180deg, rgba(127,229,255,.22), rgba(45,198,255,.12));
+      padding:12px 18px; border-radius:999px; font-size:13px; letter-spacing:.12em; font-weight:700;
+      box-shadow:0 8px 30px rgba(45,198,255,.15);
+    }
+    .cta-btn:hover{transform:translateY(-1px); box-shadow:0 14px 34px rgba(45,198,255,.22)}
+    .section{padding:90px 0}
+    .hero{padding:48px 0 60px}
+    .hero-card{
+      position:relative; overflow:hidden;
+      border-radius:34px;
+      min-height:630px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      isolation:isolate;
+    }
+    .hero-media{
+      position:absolute; inset:0;
+      background:linear-gradient(90deg, rgba(255,255,255,.04), rgba(0,0,0,0) 38%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.2));
+    }
+    .hero-media img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
+      filter:saturate(1.05) contrast(1.04);
+      transform:scale(1.02);
+    }
+    .hero-shade{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.58) 30%, rgba(255,255,255,0) 62%),
+        linear-gradient(180deg, rgba(3,10,18,.05), rgba(3,10,18,.28));
+      z-index:1;
+    }
+    .hero-hud{
+      position:absolute; inset:22px; z-index:1; pointer-events:none; border-radius:26px;
+      border:1px solid rgba(127,229,255,.18)
+    }
+    .hero-hud::before,.hero-hud::after{
+      content:""; position:absolute; width:120px; height:120px; border:1px solid rgba(127,229,255,.28); border-radius:50%;
+    }
+    .hero-hud::before{right:42px; top:38px}
+    .hero-hud::after{left:-60px; bottom:40px}
+    .hero-copy{
+      position:relative; z-index:2; padding:58px 52px; width:min(100%, 590px); color:#0a0f17;
+    }
+    .eyebrow{display:inline-flex; align-items:center; gap:12px; font-size:12px; letter-spacing:.22em; font-weight:700; color:#1a2636; text-transform:uppercase}
+    .eyebrow::before{content:""; width:44px; height:1px; background:#1a2636}
+    .hero h1{
+      margin:18px 0 14px; font-family:"Space Grotesk", Inter, sans-serif;
+      font-size:clamp(56px, 9vw, 108px); line-height:.9; letter-spacing:-.05em; color:#04070c;
+    }
+    .hero h1 span{display:block}
+    .hero h1 .light{font-weight:500}
+    .hero-sub{font-size:clamp(18px, 2.8vw, 26px); line-height:1.25; font-weight:600; max-width:520px; color:#111927}
+    .hero-p{margin:16px 0 0; font-size:16px; line-height:1.8; max-width:520px; color:#233246}
+    .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px}
+    .ghost-btn{
+      background:rgba(255,255,255,.38); color:#0f1723; backdrop-filter:blur(10px);
+      padding:12px 18px; border-radius:999px; font-size:13px; letter-spacing:.12em; font-weight:700;
+    }
+    .ghost-btn:hover{background:rgba(255,255,255,.58); transform:translateY(-1px)}
+    .hero-meta{
+      display:flex; gap:18px; flex-wrap:wrap; margin-top:28px
+    }
+    .chip{
+      padding:10px 14px; border-radius:999px; font-size:12px; letter-spacing:.12em; font-weight:700;
+      color:#102131; background:rgba(255,255,255,.42); backdrop-filter:blur(10px)
+    }
+    .panel-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:24px; margin-top:24px}
+    .panel, .project, .quote, .stack-card, .timeline-item, .footer-cta{
+      background:linear-gradient(180deg, rgba(15,29,49,.78), rgba(10,19,33,.74));
+      border:1px solid var(--line);
+      border-radius:28px; box-shadow:var(--shadow)
+    }
+    .panel{padding:26px}
+    .panel h3, .section h2{font-family:"Space Grotesk",sans-serif; letter-spacing:-.04em; margin:0}
+    .panel h3{font-size:24px}
+    .section-kicker{font-size:12px; letter-spacing:.22em; color:var(--cyan); text-transform:uppercase; margin-bottom:12px; font-weight:700}
+    .section-head{display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:26px}
+    .section-head h2{font-size:clamp(34px, 5vw, 60px)}
+    .section-head p{max-width:540px; color:var(--muted); line-height:1.8; margin:0}
+    .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+    .project{padding:26px; position:relative; overflow:hidden}
+    .project::before{content:""; position:absolute; inset:0; background:radial-gradient(circle at top right, rgba(127,229,255,.12), transparent 36%); pointer-events:none}
+    .project-top{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px}
+    .status{font-size:11px; letter-spacing:.16em; padding:8px 10px; border-radius:999px; border:1px solid var(--line-strong); color:var(--cyan); background:rgba(127,229,255,.08); font-weight:700}
+    .status.orange{color:#ffd28f; border-color:rgba(255,210,143,.35); background:rgba(255,210,143,.08)}
+    .status.green{color:#8ff6bc; border-color:rgba(143,246,188,.35); background:rgba(143,246,188,.08)}
+    .project h3{font-size:28px; margin:10px 0}
+    .project p{color:var(--muted); line-height:1.8; min-height:120px}
+    .tags{display:flex; flex-wrap:wrap; gap:10px}
+    .tags span{font-size:12px; color:#cfe1f5; border:1px solid var(--line); background:rgba(255,255,255,.03); padding:8px 12px; border-radius:999px}
+    .link-arrow{display:inline-flex; align-items:center; gap:8px; margin-top:18px; color:var(--cyan); font-weight:700; letter-spacing:.08em}
+    .split{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+    .quote{padding:32px; min-height:100%}
+    .quote h3{font-size:clamp(36px,5vw,58px); line-height:.95; margin-top:12px}
+    .quote p{color:var(--muted); line-height:1.9; margin-top:16px}
+    .timeline{display:grid; gap:16px}
+    .timeline-item{padding:24px}
+    .timeline-item strong{display:block; font-size:20px; margin-bottom:8px}
+    .timeline-item small{display:block; color:var(--cyan); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px}
+    .timeline-item p{margin:0; color:var(--muted); line-height:1.8}
+    .stack-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+    .stack-card{padding:22px}
+    .stack-card h3{font-size:18px; margin-bottom:10px}
+    .stack-card p{color:var(--muted); line-height:1.8; margin:0}
+    .jarvis-shell{display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch}
+    .console{padding:0; overflow:hidden}
+    .console-head{display:flex; justify-content:space-between; align-items:center; padding:18px 20px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.02)}
+    .console-head strong{letter-spacing:.16em; font-size:12px; color:var(--cyan)}
+    .console-head span{color:var(--muted); font-size:12px}
+    .console-log{padding:18px 18px 10px; height:340px; overflow:auto}
+    .msg{margin-bottom:14px; padding:14px 16px; border-radius:18px; max-width:92%; line-height:1.7; font-size:14px}
+    .msg.bot{background:rgba(127,229,255,.08); border:1px solid rgba(127,229,255,.18)}
+    .msg.user{background:rgba(255,255,255,.05); border:1px solid var(--line); margin-left:auto}
+    .console-actions{padding:0 18px 18px}
+    .prompt-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+    .prompt{background:rgba(255,255,255,.03); color:#d9e9f8; border-radius:999px; padding:10px 14px; font-size:12px; letter-spacing:.08em; cursor:pointer}
+    .prompt:hover{background:rgba(127,229,255,.1)}
+    .chat-form{display:flex; gap:10px}
+    .chat-input{
+      flex:1; background:rgba(255,255,255,.03); border:1px solid var(--line); color:var(--text);
+      padding:14px 16px; border-radius:16px; outline:none; font-size:14px
+    }
+    .chat-input:focus{border-color:var(--line-strong); box-shadow:0 0 0 4px rgba(127,229,255,.08)}
+    .send-btn{background:linear-gradient(180deg, rgba(127,229,255,.2), rgba(45,198,255,.12)); color:#fff; padding:0 18px; border-radius:16px; font-weight:700; cursor:pointer}
+    .jarvis-copy{padding:30px}
+    .jarvis-copy h3{font-size:38px; margin:8px 0 12px}
+    .jarvis-copy p{color:var(--muted); line-height:1.9; margin:0 0 18px}
+    .footer-cta{padding:34px; display:flex; justify-content:space-between; align-items:flex-end; gap:22px}
+    .footer-cta h2{font-size:clamp(34px,5vw,54px); margin:10px 0 0}
+    .footer-links{display:flex; flex-wrap:wrap; gap:12px}
+    .footer-links a{padding:12px 16px; border-radius:999px; border:1px solid var(--line); color:#d6e7f7}
+    .footer-links a:hover{border-color:var(--line-strong); color:var(--text)}
+    .muted{color:var(--muted)}
+    .dot{display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px rgba(127,229,255,.7); margin-right:8px}
+    @media (max-width: 1100px){
+      .panel-grid, .split, .jarvis-shell, .stack-grid, .project-grid{grid-template-columns:1fr 1fr}
+      .hero-card{min-height:690px}
+      .hero-copy{width:min(100%, 640px)}
+    }
+    @media (max-width: 820px){
+      .nav-inner{flex-wrap:wrap; padding:10px 0 12px}
+      .nav-links{order:3; width:100%; justify-content:space-between; gap:12px}
+      .hero-card{min-height:780px}
+      .hero-media img{object-position:68% center}
+      .hero-shade{background:linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.65) 32%, rgba(255,255,255,.12) 68%, rgba(0,0,0,.28) 100%)}
+      .hero-copy{padding:34px 28px; width:100%}
+      .project-grid, .panel-grid, .split, .jarvis-shell, .stack-grid{grid-template-columns:1fr}
+      .footer-cta{flex-direction:column; align-items:flex-start}
+    }
+    @media (max-width: 540px){
+      .wrap{width:min(calc(100% - 20px), var(--max))}
+      .hero-card{min-height:700px; border-radius:24px}
+      .panel, .project, .quote, .stack-card, .timeline-item, .footer-cta{border-radius:22px}
+      .hero-meta{gap:10px}
+      .chip{font-size:11px; padding:9px 12px}
+      .cta-btn,.ghost-btn{width:100%; justify-content:center; text-align:center}
+      .nav-links{font-size:12px}
+      .section{padding:72px 0}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <div class="brand-mark">YM</div>
+        <div class="brand-copy"><strong>YAJAT MAKHIJA</strong><span>MISSION CONTROL</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#work">WORK</a>
+        <a href="#journey">JOURNEY</a>
+        <a href="#jarvis">JARVIS</a>
+        <a href="#contact">CONTACT</a>
+      </div>
+      <a class="cta-btn" href="#jarvis">OPEN JARVIS</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-media"><img src="assets/hero.gif" alt="Cinematic futuristic armored hero animation over a blue sky" /></div>
+          <div class="hero-shade"></div>
+          <div class="hero-hud"></div>
+          <div class="hero-copy">
+            <div class="eyebrow">Flight systems / memory systems / real products</div>
+            <h1><span>YAJAT</span><span class="light">MAKHIJA</span></h1>
+            <div class="hero-sub">Founder of Notrix. AI systems engineer. Building products that make intelligent software actually useful.</div>
+            <p class="hero-p">I care about memory, retrieval, infrastructure, voice agents, and the layer where AI stops being a demo and starts behaving like a dependable system.</p>
+            <div class="hero-actions">
+              <a class="cta-btn" href="#work">VIEW SELECTED WORK</a>
+              <button class="ghost-btn" id="jarvisLaunch" type="button">ASK JARVIS</button>
+            </div>
+            <div class="hero-meta">
+              <span class="chip">NOTRIX · IN DEVELOPMENT</span>
+              <span class="chip">VOICE AI · IN PRODUCTION</span>
+              <span class="chip">NEW DELHI · BUILDING DAILY</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-grid reveal">
+          <div class="panel">
+            <div class="section-kicker">Current operating mode</div>
+            <h3>Building the systems layer for company memory.</h3>
+            <p class="muted">My main project is <strong>Notrix</strong>, a company brain for teams and AI agents. The idea is simple: scattered company knowledge should become searchable, cited, permission-aware memory that can also power future agents.</p>
+          </div>
+          <div class="panel">
+            <div class="section-kicker">What I optimize for</div>
+            <h3>Useful > flashy.</h3>
+            <p class="muted">I like strong product taste, clean systems, and shipping speed. I’d rather build infrastructure that keeps working than a flashy demo that collapses under real use.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section reveal">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Selected work</div>
+            <h2>Projects with a real point of view.</h2>
+          </div>
+          <p>Three areas define most of my work right now: company memory, production AI workflows, and deeper experimentation with retrieval, agents, and system design.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-top"><div class="section-kicker" style="margin:0">01 / Notrix</div><span class="status orange">IN DEVELOPMENT</span></div>
+            <h3>Notrix</h3>
+            <p>Shared company memory for teams and AI agents. Slack-first workflows, cited answers, and a BYOC architecture so customer data stays inside the customer’s own AWS environment.</p>
+            <div class="tags"><span>Memory</span><span>Retrieval</span><span>Slack</span><span>AWS</span></div>
+            <a class="link-arrow" href="https://www.notrix.si" target="_blank" rel="noreferrer">Visit Notrix ↗</a>
+          </article>
+          <article class="project">
+            <div class="project-top"><div class="section-kicker" style="margin:0">02 / Voice AI</div><span class="status green">IN PRODUCTION</span></div>
+            <h3>Healthcare outreach system</h3>
+            <p>Production voice AI for a US physical therapy provider across four clinics. Built for patient outreach and appointment booking using real integrations and operational workflows.</p>
+            <div class="tags"><span>Voice AI</span><span>Twilio</span><span>Deepgram</span><span>Automation</span></div>
+            <a class="link-arrow" href="https://github.com/YajatMakhija/patient_outreach_system" target="_blank" rel="noreferrer">Open project ↗</a>
+          </article>
+          <article class="project">
+            <div class="project-top"><div class="section-kicker" style="margin:0">03 / Systems Lab</div><span class="status">ACTIVE</span></div>
+            <h3>Retrieval, agents, research</h3>
+            <p>Hybrid RAG, code search, memory architectures, research agents, and ongoing work toward more capable AI systems that can reason with better context over time.</p>
+            <div class="tags"><span>LangGraph</span><span>Hybrid RAG</span><span>Neo4j</span><span>World models</span></div>
+            <a class="link-arrow" href="https://github.com/YajatMakhija" target="_blank" rel="noreferrer">See GitHub ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" class="section reveal">
+      <div class="wrap split">
+        <div class="quote">
+          <div class="section-kicker">Trajectory</div>
+          <h3>I don’t just want to use the future. I want to engineer it.</h3>
+          <p>Science fiction got me interested in technology. Building real systems made it concrete. I’m most excited by the intersection of AI agents, memory, secure infrastructure, and eventually physical AI.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <small>Now</small>
+            <strong>Founder building Notrix</strong>
+            <p>Focused on shipping a Slack-first company memory system with BYOC architecture and strong product quality.</p>
+          </div>
+          <div class="timeline-item">
+            <small>Shipped</small>
+            <strong>Production voice AI for clinics</strong>
+            <p>Built workflows for patient outreach and booking with integrations, scheduling logic, and real-world operational constraints.</p>
+          </div>
+          <div class="timeline-item">
+            <small>Next</small>
+            <strong>Deeper AI systems specialization</strong>
+            <p>Going deeper into memory systems, LLM security, AI system design, and the path toward more autonomous products.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">System stack</div>
+            <h2>What I like building with.</h2>
+          </div>
+          <p>I work mostly across Python backends, AI application infrastructure, retrieval systems, voice workflows, and cloud deployment.</p>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-card"><h3>Backend</h3><p>Python, FastAPI, TypeScript, JavaScript, PostgreSQL, Redis, Docker.</p></div>
+          <div class="stack-card"><h3>AI systems</h3><p>LangGraph, OpenAI SDK, retrieval pipelines, pgvector, Pinecone, Neo4j.</p></div>
+          <div class="stack-card"><h3>Voice & tools</h3><p>Vapi, Twilio, Deepgram, workflow automations, agent orchestration.</p></div>
+          <div class="stack-card"><h3>Cloud</h3><p>AWS, ECS, ALB, RDS, observability, control-plane / data-plane thinking.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="jarvis" class="section reveal">
+      <div class="wrap jarvis-shell">
+        <div class="console panel">
+          <div class="console-head"><strong><span class="dot"></span>JARVIS INTERFACE</strong><span>local knowledge core</span></div>
+          <div class="console-log" id="consoleLog">
+            <div class="msg bot">Welcome aboard. Ask about Notrix, shipped work, strengths, or what Yajat wants to build next.</div>
+          </div>
+          <div class="console-actions">
+            <div class="prompt-row">
+              <button class="prompt" data-prompt="Who is Yajat?">WHO IS YAJAT?</button>
+              <button class="prompt" data-prompt="Tell me about Notrix">NOTRIX</button>
+              <button class="prompt" data-prompt="What has he shipped?">SHIPPED WORK</button>
+              <button class="prompt" data-prompt="What is he learning next?">WHAT'S NEXT?</button>
+            </div>
+            <form class="chat-form" id="chatForm">
+              <input class="chat-input" id="chatInput" type="text" placeholder="Ask JARVIS something..." maxlength="220" />
+              <button class="send-btn" type="submit">SEND</button>
+            </form>
+          </div>
+        </div>
+        <div class="jarvis-copy panel">
+          <div class="section-kicker">JARVIS</div>
+          <h3>A cleaner interface to the story.</h3>
+          <p>This is a curated interface, not a live LLM. It gives a fast overview of what I’m building, what I’ve shipped, and where I’m heading — without turning the page into gimmicky sci-fi noise.</p>
+          <p>The goal is the same as the rest of the site: keep the presentation cinematic, but keep the substance accurate.</p>
+          <div class="tags"><span>Curated responses</span><span>Keyboard friendly</span><span>No data collection</span><span>Portfolio-native</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section reveal">
+      <div class="wrap footer-cta">
+        <div>
+          <div class="section-kicker">Contact</div>
+          <h2>If it’s worth building, I’m interested.</h2>
+          <p class="muted">Open to interesting products, collaborations, and serious AI engineering work.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/YajatMakhija" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://www.notrix.si" target="_blank" rel="noreferrer">Notrix ↗</a>
+          <a href="mailto:yajatmakhija242@gmail.com">Email ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script>
+    const knowledge = [
+      {
+        test: /who|about|yajat|yourself/i,
+        reply: "Yajat is a third-year CSE (AI/ML) student in Delhi and the solo founder of Notrix. He focuses on AI systems that are actually usable: memory, retrieval, voice workflows, infra, and products that go beyond demo quality."
+      },
+      {
+        test: /notrix|company brain|memory/i,
+        reply: "Notrix is Yajat’s main company: a shared company memory for teams and AI agents. The product is being built around Slack-first workflows, cited answers, and a BYOC model so indexed data stays in the customer’s own AWS environment."
+      },
+      {
+        test: /ship|shipped|production|voice|clinic|healthcare/i,
+        reply: "The strongest shipped system right now is a production voice AI workflow for a US physical therapy provider across four clinics, focused on patient outreach and appointment booking with real operational constraints."
+      },
+      {
+        test: /strength|skills|stack|good at/i,
+        reply: "Yajat’s strongest areas are Python, FastAPI, retrieval pipelines, backend integrations, AI workflow design, and turning LLM-based ideas into usable systems."
+      },
+      {
+        test: /next|future|learn|direction/i,
+        reply: "Next, he’s going deeper into company memory, AI systems design, LLM security, and building more agentic systems. Long term, the trajectory points toward persistent agents and physical AI."
+      }
+    ];
+
+    const log = document.getElementById('consoleLog');
+    const input = document.getElementById('chatInput');
+    const form = document.getElementById('chatForm');
+    const promptButtons = document.querySelectorAll('.prompt');
+    const jarvisLaunch = document.getElementById('jarvisLaunch');
+
+    function addMessage(text, type='bot'){
+      const div = document.createElement('div');
+      div.className = `msg ${type}`;
+      div.textContent = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function respond(query){
+      addMessage(query, 'user');
+      const item = knowledge.find(entry => entry.test.test(query));
+      const reply = item ? item.reply : "I can help with a few areas: who Yajat is, Notrix, shipped work, strengths, and what he wants to build next.";
+      setTimeout(()=> addMessage(reply, 'bot'), 320);
+    }
+
+    promptButtons.forEach(btn => btn.addEventListener('click', ()=> respond(btn.dataset.prompt)));
+    jarvisLaunch.addEventListener('click', ()=> {
+      document.getElementById('jarvis').scrollIntoView({behavior:'smooth'});
+      setTimeout(()=>input.focus(), 500);
+    });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if(!value) return;
+      respond(value);
+      input.value='';
+    });
+
+    if(window.Lenis){
+      const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    if(window.gsap){
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.from('.hero-copy > *', {opacity:0, y:28, duration:0.9, stagger:0.08, ease:'power3.out'});
+      gsap.from('.hero-card', {opacity:0, y:24, duration:1.1, ease:'power3.out'});
+      document.querySelectorAll('.reveal').forEach(section => {
+        gsap.from(section.children, {
+          scrollTrigger:{trigger:section, start:'top 78%'},
+          opacity:0, y:36, duration:0.9, stagger:0.12, ease:'power3.out'
+        });
+      });
+      gsap.to('.hero-media img', {
+        yPercent: 4,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', scrub: 1, start: 'top top', end: 'bottom top' }
+      });
+    }
+  </script>
+</body>
+</html>
